@@ -1,21 +1,12 @@
 <template>
-  <div>
+  <RouterView></RouterView>
 
-
-
-  </div>
- 
 </template>
 
-<script>
+<script setup>
 
 
-export default {
-  name: 'App',
-  components: {
-    
-  }
-}
+
 </script>
 
 <style>
