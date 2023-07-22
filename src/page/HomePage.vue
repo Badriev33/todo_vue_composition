@@ -1,6 +1,17 @@
 <script setup>
 import { useRouter } from 'vue-router';
+import { computed } from 'vue'
+
+
+import { useStore } from 'vuex'
+
 const router = useRouter()
+
+const {getters} = useStore()
+
+const computedCount = computed(() => {
+    return getters.getCount
+})
 
 </script>
 
@@ -10,5 +21,8 @@ const router = useRouter()
         <button class="h-10 rounded-md bg-black text-white" @click="router.push('List')" type="button">
             Перейти к списку дел
         </button>
+
+        {{computedCount}}
+        
     </div>
 </template>
