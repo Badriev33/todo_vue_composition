@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from './src/page/HomePage.vue'
 
-const toDoList = () => import('./src/components/toDoForm')
+const toDoList = () => import('./src/page/toDoListapage')
 //const toDoFormComponent = () => import('./src/components/toDoFormComponent')
 
 
