@@ -1,18 +1,17 @@
 import { createStore } from "vuex";
 
-
     const state = {
             count: 3,
             tasks: [
                 {
-                    id: 1,
+                    id: 23,
                     sort: 3,
                     title: 'Заполни',
                     status: 'toDo',
                     description: 'Заполнять весь день ту-ду лист'
                 },
                 {
-                    id: 2,
+                    id: 55,
                     sort: 2,
                     title: 'Зарядка',
                     status: 'Progress',
@@ -26,7 +25,25 @@ import { createStore } from "vuex";
         getTasks: ({tasks}) => {return tasks}
     }
 
+    const mutations = {
+        newTask({tasks}, todo) {
+          return tasks.push(todo)
+        },
+
+        deletTask({tasks}, id) {
+            tasks= tasks.filter((v) => {return v.id !== id})
+           //console.log(tasks);
+           //state.tasks
+           //return tasks
+           // tasks.pop()
+           return tasks
+        }
+    }
+
+
+
 export default createStore ({
     state,
-    getters
+    getters,
+    mutations
 })
