@@ -8,7 +8,8 @@ import { createStore } from "vuex";
                     sort: 3,
                     title: 'Заполни',
                     status: 'toDo',
-                    description: 'Заполнять весь день ту-ду лист'
+                    description: 'Заполнять весь день ту-ду лист',
+                    isDeleted: false
                 },
                 {
                     id: 55,
@@ -16,6 +17,7 @@ import { createStore } from "vuex";
                     title: 'Зарядка',
                     status: 'Progress',
                     description: 'Отжумания 10 раз, Пресс 15 раз, Подтягивания 8 раз',
+                    isDeleted: false
                 }
             ]
     }
@@ -31,12 +33,13 @@ import { createStore } from "vuex";
         },
 
         deletTask({tasks}, id) {
-            tasks= tasks.filter((v) => {return v.id !== id})
-           //console.log(tasks);
-           //state.tasks
-           //return tasks
-           // tasks.pop()
-           return tasks
+            //tasks = tasks.filter((v) => {return v.id !== id})
+            //tasks = tasks.filter(v => (v.id == id))
+            let deleteTask = tasks.findIndex(v => (v.id == id))
+            console.log('deleteTask', deleteTask);
+            tasks = tasks.splice(deleteTask, 1)
+           // tasks.splise(deleteTask, 1)
+          // return tasks
         }
     }
 

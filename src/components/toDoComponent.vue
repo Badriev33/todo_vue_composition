@@ -13,7 +13,7 @@ const {commit} = useStore();
 
 
 const computedTascs = computed(() => {
-  return getters.getTasks;
+  return getters.getTasks.filter(v => (v.isDeleted == false));
 });
 
 const openModalTask = (id) => {
@@ -21,34 +21,18 @@ const openModalTask = (id) => {
 };
 
 const createTask = () => {
-    //newTask.id = uniqueId()
-
-    // const newTask = {
-    //     id: uniqueId(),
-    //     sort: 0,
-    //     title: 'Новая задача',
-    //     status: 'Progress',
-    //     description: '...',
-    // }
-   // commit('newTask', newTask)
     router.push({name: 'Form'})
 }
 
 const deleteTask = (id) => {
-
-     console.log('id',id);
-
-    // console.log(computedTascs.value.filter(v => (v.id != id)))
      commit('deletTask', id)
-
 }
 </script>
 
 <template>
   <div
-    class="w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+    class="w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-white-800 dark:border-gray-700"
   >
-    <!-- <h1 class="flex justify-center">component</h1> -->
     <div class="grid grid-cols-5 flex justify-center">
       <span>Sort</span>
       <span>Task</span>
@@ -57,19 +41,21 @@ const deleteTask = (id) => {
       <span>Remove</span>
     </div>
     <div class="mt-5">
+      <div v-if="!computedTascs.length">Нет активных задач</div>
       <div
         v-for="task of computedTascs"
         :key="task.id"
-        class="items-center h-10 task my-3 grid grid-cols-5 flex justify-center rounded-md border-solid border-2 border-indigo-300"
+        class="castom items-center h-10 task my-3 grid grid-cols-5 flex justify-center rounded-md border-solid border-2 border-indigo-300"
       >
-    
+       
         <span @click="openModalTask(task.id)" class="pl-2">{{ task.sort }}</span>
+  
         <span @click="openModalTask(task.id)">{{ task.title }}</span>
         <span @click="openModalTask(task.id)">{{ task.status }}</span>
 
         <span>
           <svg
-            class="w-6 h-6 text-gray-800 dark:text-white"
+            class="w-6 h-6 text-gray-800 dark:text-black"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -86,7 +72,7 @@ const deleteTask = (id) => {
         </span>
         <span @click="deleteTask(task.id)">
           <svg
-            class="w-6 h-6 text-gray-800 dark:text-white"
+            class="w-6 h-6 text-gray-800 dark:text-black"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -103,6 +89,7 @@ const deleteTask = (id) => {
         </span>
       </div>
     </div>
+    
     <div class="flex justify-end">
       <button
         @click="createTask"
@@ -116,5 +103,9 @@ const deleteTask = (id) => {
 <style>
 .task:hover {
   border-color: #9b59b6;
+}
+
+.castom {
+   transition: all .3s ease;
 }
 </style>

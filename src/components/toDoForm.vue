@@ -25,6 +25,7 @@ const saveTask = ()=> {
         title: title,
         status: statusTask,
         description: description,
+        isDeleted: false,
     }
     
     commit('newTask', newTask)
