@@ -31,6 +31,10 @@ import { createStore } from "vuex";
         newTask({tasks}, todo) {
           return tasks.push(todo)
         },
+        editTasc({tasks}, editTasc) {
+            console.log(tasks);
+            console.log(editTasc);
+        },
 
         deletTask({tasks}, id) {
             //tasks = tasks.filter((v) => {return v.id !== id})

@@ -3,14 +3,9 @@ import { useRouter } from 'vue-router';
 import { computed } from "vue";
 import { useStore } from "vuex";
 
-
-// import uniqueId from 'lodash/uniqueId'
 const router = useRouter()
-
 const { getters } = useStore();
-
 const {commit} = useStore();
-
 
 const computedTascs = computed(() => {
   return getters.getTasks.filter(v => (v.isDeleted == false));
@@ -18,6 +13,7 @@ const computedTascs = computed(() => {
 
 const openModalTask = (id) => {
     console.log(id);
+    router.push({ name: 'redactMode', params: { id } })
 };
 
 const createTask = () => {
@@ -49,11 +45,10 @@ const deleteTask = (id) => {
       >
        
         <span @click="openModalTask(task.id)" class="pl-2">{{ task.sort }}</span>
-  
         <span @click="openModalTask(task.id)">{{ task.title }}</span>
         <span @click="openModalTask(task.id)">{{ task.status }}</span>
 
-        <span>
+        <span @click="openModalTask(task.id)">
           <svg
             class="w-6 h-6 text-gray-800 dark:text-black"
             aria-hidden="true"

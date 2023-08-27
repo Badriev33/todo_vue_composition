@@ -23,6 +23,12 @@ const router = createRouter({
                     path: 'add',
                     name: 'Form',
                     component: toDoForm
+                },
+                {
+                    path: '/list/:id/edit',
+                    name: 'redactMode',
+                    component: toDoForm,
+                    props: true
                 }
             ]
         },
