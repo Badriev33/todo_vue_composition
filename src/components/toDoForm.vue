@@ -9,6 +9,7 @@ const { getters } = useStore();
 const { commit } = useStore();
 
 let showError = ref(false);
+const id = ref("");
 const title = ref("");
 const description = ref("");
 const sortTask = ref(0);
@@ -31,7 +32,8 @@ onMounted(() => {
   }
 
   if (getTaskById.value && props.id) {
-    (title.value = getTaskById.value[0].title),
+    (id.value = props.id),
+      (title.value = getTaskById.value[0]?.title),
       (sortTask.value = getTaskById.value[0].sort),
       (description.value = getTaskById.value[0].description),
       (statusTask.value = getTaskById.value[0].status);
@@ -57,11 +59,14 @@ const checkForm = () => {
 const saveTask = () => {
   if (getTaskById.value && props.id) {
     commit("editTasc", {
-      title: title.value,
+      id: id.value,
       sort: sortTask.value,
-      description: description.value,
+      title: title.value,
       status: statusTask.value,
+      description: description.value,
+      isDeleted: false,
     });
+    router.push({ name: "List" });
   } else {
     showError.value = true;
     if (!checkForm()) {
@@ -108,7 +113,6 @@ const saveTask = () => {
       <textarea
         v-model="sortTask"
         id="message"
-        type="number"
         rows="4"
         class="block h-10 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Напишите здесь что-нибудь..."

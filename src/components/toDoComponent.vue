@@ -1,28 +1,28 @@
 <script setup>
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
-const router = useRouter()
+const router = useRouter();
 const { getters } = useStore();
-const {commit} = useStore();
+const { commit } = useStore();
 
 const computedTascs = computed(() => {
-  return getters.getTasks.filter(v => (v.isDeleted == false));
+  return getters.getTasks.filter((v) => v.isDeleted == false);
 });
 
 const openModalTask = (id) => {
-    console.log(id);
-    router.push({ name: 'redactMode', params: { id } })
+  console.log(id);
+  router.push({ name: "redactMode", params: { id } });
 };
 
 const createTask = () => {
-    router.push({name: 'Form'})
-}
+  router.push({ name: "Form" });
+};
 
 const deleteTask = (id) => {
-     commit('deletTask', id)
-}
+  commit("deletTask", id);
+};
 </script>
 
 <template>
@@ -43,11 +43,11 @@ const deleteTask = (id) => {
         :key="task.id"
         class="castom items-center h-10 task my-3 grid grid-cols-5 flex justify-center rounded-md border-solid border-2 border-indigo-300"
       >
-       
-        <span @click="openModalTask(task.id)" class="pl-2">{{ task.sort }}</span>
+        <span @click="openModalTask(task.id)" class="pl-2">{{
+          task.sort
+        }}</span>
         <span @click="openModalTask(task.id)">{{ task.title }}</span>
         <span @click="openModalTask(task.id)">{{ task.status }}</span>
-
         <span @click="openModalTask(task.id)">
           <svg
             class="w-6 h-6 text-gray-800 dark:text-black"
@@ -84,7 +84,7 @@ const deleteTask = (id) => {
         </span>
       </div>
     </div>
-    
+
     <div class="flex justify-end">
       <button
         @click="createTask"
@@ -101,6 +101,6 @@ const deleteTask = (id) => {
 }
 
 .castom {
-   transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 </style>
