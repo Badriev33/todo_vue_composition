@@ -12,9 +12,12 @@ const computedTascs = computed(() => {
 });
 
 const openModalTask = (id) => {
-  console.log(id);
   router.push({ name: "redactMode", params: { id } });
 };
+
+const openDeletedList = () => {
+  router.push({ name: "deletedList"});
+}
 
 const createTask = () => {
   router.push({ name: "Form" });
@@ -86,6 +89,12 @@ const deleteTask = (id) => {
     </div>
 
     <div class="flex justify-end">
+       <button
+        @click="openDeletedList"
+        class="bg-transparent mr-2 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+      >
+        Удалённые задачи
+      </button>
       <button
         @click="createTask"
         class="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
