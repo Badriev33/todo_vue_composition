@@ -18,6 +18,22 @@ const state = {
         status: 'Progress',
         description: 'Отжумания 10 раз, Пресс 15 раз, Подтягивания 8 раз',
         isDeleted: false
+    },
+    {
+        id: 58,
+        sort: 5,
+        title: 'Удалённая',
+        status: 'Progress',
+        description: 'Отжумания 10 раз, Пресс 15 раз, Подтягивания 8 раз',
+        isDeleted: true
+    },
+    {
+        id: 59,
+        sort: 7,
+        title: 'Удалённая',
+        status: 'Progress',
+        description: 'Отжумания 10 раз, Пресс 15 раз, Подтягивания 8 раз',
+        isDeleted: true
     }
     ]
 }
@@ -48,12 +64,18 @@ const mutations = {
             }
         })
     },
-    deletTask({
-        tasks
-    }, id) {
+    deletTask({tasks}, id) {
         tasks.map((v) => {
             if (v.id == id) {
                 v.isDeleted = true
+            }
+
+        })
+    },
+    restoreTask({tasks}, id) {
+        tasks.map((v) => {
+            if (v.id == id) {
+                v.isDeleted = false
             }
 
         })
