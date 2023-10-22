@@ -1,57 +1,83 @@
 <script setup>
-import { useRouter } from "vue-router";
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { useRouter } from "vue-router"
+import { computed, ref } from "vue"
+import { useStore } from "vuex"
 
-const router = useRouter();
-const { getters } = useStore();
-const { commit } = useStore();
+const router = useRouter()
+const { getters } = useStore()
+const { commit } = useStore()
 
-const computedTascs = computed(() => {
-  return getters.getTasks.filter((v) => v.isDeleted == false);
-});
+const sort = ref(false)
+
+const computedTasks = computed(() => {
+  return getters.getTasks.filter((v) => v.isDeleted === false)
+})
+
+const truncateTask = (taskName) => {
+  return taskName.length > 7 ? taskName.slice(0, 7 - 1) + '…' : taskName
+}
 
 const openModalTask = (id) => {
-  router.push({ name: "redactMode", params: { id } });
-};
+  router.push({ name: "redactMode", params: { id } })
+}
 
 const openDeletedList = () => {
-  router.push({ name: "deletedList"});
+  router.push({ name: "deletedList"})
 }
 
 const createTask = () => {
-  router.push({ name: "Form" });
-};
+  router.push({ name: "Form" })
+}
 
 const deleteTask = (id) => {
-  commit("deletTask", id);
-};
-</script>
+  commit("deletedTask", id)
+}
 
+const sortTask = () => {
+  sort.value = !sort.value
+  sort.value
+    ? commit("sortTaskList", "asc")
+    : commit("sortTaskList", "desc")
+}
+
+</script>
 <template>
   <div
     class="w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-white-800 dark:border-gray-700"
   >
     <div class="grid grid-cols-5 flex justify-center">
-      <span>Sort</span>
+      <div
+          class="flex"
+          @click="sortTask()"
+        >
+        <span>Sort</span>
+        <span>
+          <svg v-if="sort" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
+          </svg>
+          <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
+          </svg>
+      </span>
+      </div>
       <span>Task</span>
       <span>Status</span>
       <span>Edit</span>
       <span>Remove</span>
     </div>
     <div class="mt-5">
-      <div v-if="!computedTascs.length">Нет активных задач</div>
+      <div v-if="!computedTasks.length">Нет активных задач</div>
       <div
-        v-for="task of computedTascs"
+        v-for="task of computedTasks"
         :key="task.id"
         class="castom items-center h-10 task my-3 grid grid-cols-5 flex justify-center rounded-md border-solid border-2 border-indigo-300"
       >
         <span @click="openModalTask(task.id)" class="pl-2">{{
           task.sort
         }}</span>
-        <span @click="openModalTask(task.id)">{{ task.title }}</span>
+        <span @click="openModalTask(task.id)">{{ truncateTask(task.title) }}</span>
         <span @click="openModalTask(task.id)">{{ task.status }}</span>
-        <span @click="openModalTask(task.id)">
+        <span class="ml-2" @click="openModalTask(task.id)">
           <svg
             class="w-6 h-6 text-gray-800 dark:text-black"
             aria-hidden="true"
@@ -68,7 +94,7 @@ const deleteTask = (id) => {
             />
           </svg>
         </span>
-        <span @click="deleteTask(task.id)">
+        <span class="ml-3" @click="deleteTask(task.id)">
           <svg
             class="w-6 h-6 text-gray-800 dark:text-black"
             aria-hidden="true"
@@ -108,7 +134,6 @@ const deleteTask = (id) => {
 .task:hover {
   border-color: #9b59b6;
 }
-
 .castom {
   transition: all 0.3s ease;
 }

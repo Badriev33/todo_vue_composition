@@ -22,15 +22,15 @@ const state = {
     {
         id: 58,
         sort: 5,
-        title: 'Удалённая',
+        title: 'Удалённая1',
         status: 'Progress',
-        description: 'Отжумания 10 раз, Пресс 15 раз, Подтягивания 8 раз',
+        description: 'Отжумания 5 раз, Пресс 15 раз, Подтягивания 7 раз',
         isDeleted: true
     },
     {
         id: 59,
         sort: 7,
-        title: 'Удалённая',
+        title: 'Удалённая2',
         status: 'Progress',
         description: 'Отжумания 10 раз, Пресс 15 раз, Подтягивания 8 раз',
         isDeleted: true
@@ -48,37 +48,40 @@ const getters = {
 
 const mutations = {
     newTask({
-        tasks
-    }, todo) {
+                tasks
+            }, todo) {
         return tasks.push(todo)
     },
     editTasc({
-        tasks
-    }, editTasc) {
+                 tasks
+             }, task) {
         tasks.map((v) => {
-            if (v.id == editTasc.id) {
-                v.title = editTasc.title
-                v.sort = editTasc.sort
-                v.status = editTasc.status
-                v.description = editTasc.description
+            if (v.id == task.id) {
+                v.title = task.title
+                v.sort = task.sort
+                v.status = task.status
+                v.description = task.description
             }
         })
     },
-    deletTask({tasks}, id) {
+deletedTask({tasks}, id) {
         tasks.map((v) => {
-            if (v.id == id) {
+            if (v.id === id) {
                 v.isDeleted = true
             }
-
         })
     },
     restoreTask({tasks}, id) {
         tasks.map((v) => {
-            if (v.id == id) {
+            if (v.id === id) {
                 v.isDeleted = false
             }
-
         })
+    },
+    sortTaskList({tasks}, sort) {
+      sort === 'asc'
+        ? tasks = tasks.sort((a, b) => a.sort > b.sort ? 1 : -1)
+        : tasks = tasks.sort((a, b) => a.sort < b.sort ? 1 : -1)
     }
 }
 

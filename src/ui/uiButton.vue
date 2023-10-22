@@ -1,6 +1,6 @@
 <script setup>
     import { defineProps } from 'vue';
-    const props = defineProps(['title', 'color'])
+    const props = defineProps(['title'])
 </script>
 <template>
     <button 

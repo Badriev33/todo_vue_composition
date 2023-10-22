@@ -66,6 +66,7 @@ const saveTask = () => {
       description: description.value,
       isDeleted: false,
     });
+    console.log(true)
     router.push({ name: "List" });
   } else {
     showError.value = true;
@@ -90,7 +91,6 @@ const saveTask = () => {
   <div
     class="absolute top-20 left-1/3 right-1/3 z-50 w-1/3 bg-white border border-black rounded-lg"
   >
-    {{ props.id }}
     <div class="p-5">
       <div></div>
       <label
@@ -142,7 +142,6 @@ const saveTask = () => {
         <option selected value="toDo">Todo</option>
         <option value="Progress">Work</option>
         <option value="Done">Done</option>
-        <option value="Deleted">Deleted</option>
       </select>
 
       <div
