@@ -2,7 +2,7 @@
 import {useRouter} from "vue-router";
 import {computed} from 'vue'
 import {useStore} from 'vuex'
-import uiButton from '../ui/uiButton'
+import uiButton from '../ui/UiButton'
 
 const router = useRouter();
 const { getters, commit } = useStore();

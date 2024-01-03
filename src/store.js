@@ -6,7 +6,7 @@ const state = {
     tasks: [{
         id: 23,
         sort: 3,
-        title: 'Заполни',
+        title: 'Заполнить туду',
         status: 'toDo',
         description: 'Заполнять весь день ту-ду лист',
         isDeleted: false
@@ -14,25 +14,25 @@ const state = {
     {
         id: 55,
         sort: 2,
-        title: 'Зарядка',
+        title: 'Уборка',
         status: 'Progress',
-        description: 'Отжумания 10 раз, Пресс 15 раз, Подтягивания 8 раз',
+        description: 'Убрать комнату',
         isDeleted: false
     },
     {
         id: 58,
         sort: 5,
-        title: 'Удалённая1',
+        title: 'Зарядка',
         status: 'Progress',
-        description: 'Отжумания 5 раз, Пресс 15 раз, Подтягивания 7 раз',
+        description: 'Сделать зарядку',
         isDeleted: true
     },
     {
         id: 59,
         sort: 7,
-        title: 'Удалённая2',
+        title: 'Ужин',
         status: 'Progress',
-        description: 'Отжумания 10 раз, Пресс 15 раз, Подтягивания 8 раз',
+        description: 'Приготовить ужин',
         isDeleted: true
     }
     ]
@@ -64,7 +64,7 @@ const mutations = {
             }
         })
     },
-deletedTask({tasks}, id) {
+    deletedTask({tasks}, id) {
         tasks.map((v) => {
             if (v.id === id) {
                 v.isDeleted = true

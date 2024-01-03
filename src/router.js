@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomePage from './src/page/HomePage.vue'
+import HomePage from './page/HomePage.vue'
 
-const toDoList = () => import('./src/page/toDoListapage')
-const toDoForm = () => import('./src/components/toDoForm')
-const deletedTasks = () => import('./src/components/deletedTaskList')
+const toDoList = () => import('./page/TodoListPage')
+const TodoForm = () => import('./components/TodoForm')
+const deletedTasks = () => import('./components/DeletedTaskList')
 
 
 const router = createRouter({
@@ -22,12 +22,12 @@ const router = createRouter({
                 {
                     path: 'add',
                     name: 'Form',
-                    component: toDoForm
+                    component: TodoForm
                 },
                 {
                     path: '/list/:id/edit',
                     name: 'redactMode',
-                    component: toDoForm,
+                    component: TodoForm,
                     props: true
                 }
             ]
